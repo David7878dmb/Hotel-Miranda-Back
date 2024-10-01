@@ -5,12 +5,13 @@ import jwt from 'jsonwebtoken';
 const JWT_SECRET = process.env.JWT_SECRET || '1234';
 
 // Middleware de autenticación
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) =>{
+export const authMiddleware = (req: Request, res: Response, next: NextFunction):void =>{
     //Obtener token de la cabecera
     const token = req.header('Authorization')?.split('')[1];
 
     if (!token){
-        return res.status(401).json({message: 'Access denied. No token provided.'})
+        res.status(401).json({message: 'Access denied. No token provided.'})
+        return;
     }
 
     try {
@@ -20,5 +21,6 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         next();
     }   catch (err) {
         res.status(400).json({message: 'Invalid Token'});
+        return;
     }
 }

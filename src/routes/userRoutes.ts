@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { usersController } from '../controllers/usersControllers';
-import { authMiddleware } from '../middleware/auth';
+import { authMiddleware } from '../middelware/auth';
 
 const router = Router();
 
 //Todas las habitaciones 
 router.get('/', authMiddleware, usersController.getAllUsers);
-    
+
 //Habitacion por id
 router.get('/:id', authMiddleware, usersController.getUsersById);
 

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { bookingsController } from '../controllers/bookingControllers';
-import { authMiddleware } from '../middleware/auth';
+import { authMiddleware } from '../middelware/auth';
 
 const router = Router();
 

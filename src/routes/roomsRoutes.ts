@@ -11,12 +11,12 @@ router.get('/', authMiddleware, roomsController.getAllRooms);
 router.get('/:id', authMiddleware, roomsController.getRoomById);
 
 //Crear habitacion
-router.get('/', authMiddleware, roomsController.createRoom);
+router.post('/', authMiddleware, roomsController.createRoom);
 
 //Actualizar habitación por ID
-router.get('/:id', authMiddleware, roomsController.updateRoom);
+router.put('/:id', authMiddleware, roomsController.updateRoom);
 
 //Eliminar habitacion por iD
-router.get('/:id', authMiddleware, roomsController.delateRoom);
+router.delete('/:id', authMiddleware, roomsController.delateRoom);
 
 export default router;

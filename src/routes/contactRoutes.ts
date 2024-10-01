@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { contactController } from '../controllers/contactControllers';
-import { authMiddleware } from '../middleware/auth';
-
+import { authMiddleware } from '../middelware/auth';
 const router = Router();
 
 //Todas las habitaciones 
