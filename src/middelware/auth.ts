@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express-serve-static-core';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 // Clave secreta almacenada en el archivo .env
-const JWT_SECRET = process.env.JWT_SECRET || '1234';
+const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
 // Usuario hardcoded
 const hardcodedUser = {
