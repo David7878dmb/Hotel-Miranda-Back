@@ -1,22 +1,22 @@
 import { Router } from "express";
-import { bookingsController } from '../controllers/bookingControllers';
+import { bookingController } from '../controllers/bookingControllers';
 import { authMiddleware } from '../middelware/auth';
 
 const router = Router();
 
 //Todas las habitaciones 
-router.get('/', authMiddleware, bookingsController.getAllBookings);
+router.get('/', authMiddleware, bookingController.getAllBooking);
 
 //Habitacion por id
-router.get('/:id', authMiddleware, bookingsController.getBookingsById);
+router.get('/:id', authMiddleware, bookingController.getBookingById);
 
 //Crear habitacion
-router.get('/', authMiddleware, bookingsController.createBookings);
+router.get('/', authMiddleware, bookingController.createBooking);
 
 //Actualizar habitación por ID
-router.get('/:id', authMiddleware, bookingsController.updateBookings);
+router.get('/:id', authMiddleware, bookingController.updateBooking);
 
 //Eliminar habitacion por iD
-router.get('/:id', authMiddleware, bookingsController.delateBookings);
+router.get('/:id', authMiddleware, bookingController.delateBooking);
 
 export default router;
