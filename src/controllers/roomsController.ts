@@ -11,7 +11,7 @@ export const roomController = {
         }
     },
 
-    getRoomsById: async (req: Request, res: Response) => {
+    getRoomById: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
             const room = await roomService.fetchOne(id);

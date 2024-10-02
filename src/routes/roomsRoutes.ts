@@ -1,22 +1,22 @@
 import { Router } from "express";
-import { roomsController } from '../controllers/roomsController';
+import { roomController } from '../controllers/roomsController';
 import { authMiddleware } from '../middelware/auth';
 
 const router = Router();
 
 //Todas las habitaciones 
-router.get('/', authMiddleware, roomsController.getAllRooms);
+router.get('/', authMiddleware, roomController.getAllRoom);
 
 //Habitacion por id
-router.get('/:id', authMiddleware, roomsController.getRoomById);
+router.get('/:id', authMiddleware, roomController.getRoomById);
 
 //Crear habitacion
-router.post('/', authMiddleware, roomsController.createRoom);
+router.post('/', authMiddleware, roomController.createRoom);
 
 //Actualizar habitación por ID
-router.put('/:id', authMiddleware, roomsController.updateRoom);
+router.put('/:id', authMiddleware, roomController.updateRoom);
 
 //Eliminar habitacion por iD
-router.delete('/:id', authMiddleware, roomsController.delateRoom);
+router.delete('/:id', authMiddleware, roomController.delateRoom);
 
 export default router;
