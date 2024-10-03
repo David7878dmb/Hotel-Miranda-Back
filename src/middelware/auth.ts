@@ -19,7 +19,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
         res.status(401).json({ message: 'Access denied. No token provided.' });
         return;
     }
-
+    
     try {
         // Verificar el token
         const decoded = jwt.verify(token, JWT_SECRET);
