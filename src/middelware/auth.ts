@@ -43,17 +43,3 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
         return;
     }
 };
-
-// Controlador de login para obtener el token
-export const login = (req: Request, res: Response): void => {
-    const { username, password } = req.body;
-
-    // Verificar si el usuario y la contraseña coinciden con el hardcoded
-    if (username === hardcodedUser.username && password === hardcodedUser.password) {
-        // Crear y firmar el token con el nombre de usuario
-        const token = jwt.sign({ username: hardcodedUser.username }, JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
-    } else {
-        res.status(400).json({ message: 'Invalid credentials' });
-    }
-};
