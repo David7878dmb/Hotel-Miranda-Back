@@ -1,19 +1,20 @@
 import { Contact } from '../interfaces/contactInterfaces';
 import contactData from '../data/data__contact.json';
-
+import { contactModel } from '../mongo/contactMongo';
 
 const contacts: Contact[] = contactData;
 
 export const contactService = {
   fetchAll: async (): Promise<Contact[]> => {
     // Retorna todos los contactos
-    return contacts;
+    
+    return await contactModel.find();
   },
 
-  fetchOne: async (id: string): Promise<Contact | undefined> => {
+  fetchOne: async (id: string): Promise<Contact | undefined | null> => {
     // Encuentra un contacto por ID
     const contact = contacts.find((contact) => contact.id === parseInt(id, 10));
-    return contact;
+    return await contactModel.findOne({id:id});
   },
 
   create: async (contactData: Contact): Promise<Contact> => {

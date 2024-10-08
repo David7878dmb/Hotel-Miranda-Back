@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import publicRoutes from './routes/publicRoutes';
 import userRoutes from './routes/userRoutes';
 import roomsRoutes from './routes/roomsRoutes';
-import contactRoutes from './routes/roomsRoutes';
+import contactRoutes from './routes/contactRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 import cookieParser from 'cookie-parser';
 import loginRoutes from './routes/loginRoutes';

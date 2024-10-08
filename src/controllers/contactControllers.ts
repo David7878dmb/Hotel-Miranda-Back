@@ -14,11 +14,11 @@ export const contactController = {
     getContactById: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const contact = await contactService.fetchOne(id);
-            if (!contact) {
+            const contacts = await contactService.fetchOne(id);
+            if (!contacts) {
                 res.status(404).json({ message: 'Contact not found' });
             } else {
-                res.json(contact);
+                res.json(contacts);
             }
         } catch (error) {
             res.status(500).json({ message: 'Error fetching contact' });
@@ -44,7 +44,7 @@ export const contactController = {
         }
     },
 
-    delateContact: async (req: Request, res: Response) => {
+    deleteContact: async (req: Request, res: Response) => {  
         try {
             const id = req.params.id;
             await contactService.delete(id);

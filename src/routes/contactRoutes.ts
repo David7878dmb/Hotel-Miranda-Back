@@ -1,21 +1,22 @@
 import { Router } from "express";
-import { contactController } from '../controllers/contactControllers';
-import { authMiddleware } from '../middelware/auth';
+import { contactController } from '../controllers/contactControllers'; 
+import { authMiddleware } from '../middelware/auth';  
+
 const router = Router();
 
-//Todas las habitaciones 
+// Obtener todos los contactos
 router.get('/', authMiddleware, contactController.getAllContact);
 
-//Habitacion por id
+// Obtener un contacto por ID
 router.get('/:id', authMiddleware, contactController.getContactById);
 
-//Crear habitacion
-router.get('/', authMiddleware, contactController.createContact);
+// Crear un nuevo contacto
+router.post('/', authMiddleware, contactController.createContact); 
 
-//Actualizar habitación por ID
-router.get('/:id', authMiddleware, contactController.updateContact);
+// Actualizar contacto por ID
+router.put('/:id', authMiddleware, contactController.updateContact); 
 
-//Eliminar habitacion por iD
-router.get('/:id', authMiddleware, contactController.delateContact);
+// Eliminar contacto por ID
+router.delete('/:id', authMiddleware, contactController.deleteContact);
 
 export default router;
