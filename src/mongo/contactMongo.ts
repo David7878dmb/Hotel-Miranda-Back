@@ -3,7 +3,7 @@ import { Contact } from '../interfaces/contactInterfaces';
 import { connect } from 'http2';
 const { Schema } = mongoose;
 
-const contactMongo = new Schema<Contact>({
+export const contactMongo = new Schema<Contact>({
     id: {type: Number, required: true},
     name: {type: String, required: true},
     date: {type: String, required: true},

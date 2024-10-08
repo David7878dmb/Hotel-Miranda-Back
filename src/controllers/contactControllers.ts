@@ -1,11 +1,15 @@
 import { Request, Response } from 'express';
-import { contactService } from '../services/contactService';
+//import { ContactService } from '../services/ContactService';
+import ContactService from '../services/contactService';
+
+const contactService = new ContactService();
 
 export const contactController = {
     getAllContact: async (req: Request, res: Response) => {
         try {
-            const contacts = await contactService.fetchAll();
-            res.json(contacts);
+            console.log('miaumiaumiau');
+            const contacts = await contactService.getAll();
+            res.send(contacts);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching contacts' });
         }
@@ -13,12 +17,11 @@ export const contactController = {
 
     getContactById: async (req: Request, res: Response) => {
         try {
-            const id = req.params.id;
-            const contacts = await contactService.fetchOne(id);
-            if (!contacts) {
+            const contact = await contactService.getByID(+req.params.id);
+            if (!contact) {
                 res.status(404).json({ message: 'Contact not found' });
             } else {
-                res.json(contacts);
+                res.json(contact);
             }
         } catch (error) {
             res.status(500).json({ message: 'Error fetching contact' });
@@ -27,7 +30,7 @@ export const contactController = {
 
     createContact: async (req: Request, res: Response) => {
         try {
-            const newContact = await contactService.create(req.body);
+            const newContact = contactService.create(req.body);
             res.status(201).json(newContact);
         } catch (error) {
             res.status(500).json({ message: 'Error creating contact' });
@@ -36,8 +39,7 @@ export const contactController = {
 
     updateContact: async (req: Request, res: Response) => {
         try {
-            const id = req.params.id;
-            const updatedContact = await contactService.update(id, req.body);
+            const updatedContact = contactService.update(+req.params.id, req.body);
             res.json(updatedContact);
         } catch (error) {
             res.status(500).json({ message: 'Error updating contact' });
@@ -45,12 +47,12 @@ export const contactController = {
     },
 
     deleteContact: async (req: Request, res: Response) => {  
-        try {
-            const id = req.params.id;
-            await contactService.delete(id);
-            res.status(204).json();
-        } catch (error) {
-            res.status(500).json({ message: 'Error deleting contact' });
-        }
+        contactService.remove(+req.params.id).then(deleted => {
+            if (deleted) {
+                res.status(204).send();
+            } else {
+                res.status(404).send({ message: 'Contact not found' });
+            }
+        });
     }
 };

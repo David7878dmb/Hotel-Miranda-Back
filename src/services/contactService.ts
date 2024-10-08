@@ -1,8 +1,19 @@
 import { Contact } from '../interfaces/contactInterfaces';
-import contactData from '../data/data__contact.json';
 import { contactModel } from '../mongo/contactMongo';
+import { CrudService } from './allService';
 
-const contacts: Contact[] = contactData;
+
+class ContactService extends CrudService<Contact> {
+  constructor() {
+    console.log('miau2');
+    super(contactModel);
+  }
+} 
+export default ContactService;
+
+
+
+/*const contacts: Contact[] = contactData;
 
 export const contactService = {
   fetchAll: async (): Promise<Contact[]> => {
@@ -42,3 +53,4 @@ export const contactService = {
     }
   }
 };
+*/
