@@ -15,18 +15,15 @@ const contactMongo = new Schema<Contact>({
 // 3. Create a Model.
 const contactModel = model<Contact>('Contact', contactMongo);
 
-run().catch(err => console.log(err));
 
-async function run() {
+
+export async function run() {
   try {
-      // 4. Connect to MongoDB
-      await connect('mongodb://localhost:27017');
-    
       const billContact = new contactModel({
-        id: 102,
-        name: "Bill",
+        id: 104,
+        name: "Pepita",
         date: "2001-09-08",
-        email: "billytheboy@email.com",
+        email: "pepita@email.com",
         phone: "666 777 987",
         value: 2,
       });
@@ -38,7 +35,6 @@ async function run() {
   }
 }
 
-run();
 
 // Exportar el modelo
 export { contactModel };
