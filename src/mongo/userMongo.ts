@@ -1,9 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose, { model } from 'mongoose';
+import { User } from '../interfaces/userInterfaces';
 const { Schema } = mongoose;
 
-const contactMongo = new Schema({
+export const userMongo = new Schema({
     id: Number,
-    name: String,
+    username: String,
+    password: String,
     picture: String,
     joined: String,  
     "job-desk": String,
@@ -11,3 +13,5 @@ const contactMongo = new Schema({
     contact: String,
     status: String
   });
+
+export const userModel = model<User>('User', userMongo);

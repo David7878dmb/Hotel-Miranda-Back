@@ -1,6 +1,19 @@
 import { User } from '../interfaces/userInterfaces';
-import usersData from '../data/data__users.json'; // Asumiendo que tienes los datos en un archivo JSON
+import { userModel, userMongo } from '../mongo/userMongo';
+import { CrudService } from './allService';
 
+
+class userService extends CrudService<User> {
+  constructor() {
+    console.log('miau2');
+    super(userModel);
+  }
+} 
+export default userService;
+
+
+
+/*
 export const userService = {
   fetchAll: async (): Promise<User[]> => {
     // Retorna todos los usuarios
@@ -13,6 +26,9 @@ export const userService = {
     return user;
   },
 
+  getByUsername: async (username: string): Promise<User | null> => {
+    const username = usersData.findOne
+  },
   create: async (userData: User): Promise<User> => {
     // Crea un nuevo usuario
     const newUser = { ...userData, id: usersData.length + 1 };
@@ -38,3 +54,4 @@ export const userService = {
     }
   }
 };
+*/

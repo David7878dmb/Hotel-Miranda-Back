@@ -17,6 +17,11 @@ export class CrudService<T> {
         return await this.model.findOne({ id }); 
     }
 
+    //Obtener lo que sea
+    async getByAnyone(props: {}): Promise<T | null> {
+        return await this.model.findOne(props); 
+    }
+
     // Crear un nuevo elemento
     async create(itemInput: Partial<T>): Promise<T> {
         const newItem = new this.model(itemInput);

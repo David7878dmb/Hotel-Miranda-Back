@@ -5,18 +5,18 @@ import { authMiddleware } from '../middelware/auth';
 const router = Router();
 
 //Todas las habitaciones 
-router.get('/', authMiddleware, userController.getAllUser);
+router.get('/', userController.getAllUser);
 
 //Habitacion por id
-router.get('/:id', authMiddleware, userController.getUserById);
+router.get('/:id', userController.getUserById);
 
 //Crear habitacion
-router.post('/', authMiddleware, userController.createUser);
+router.post('/', userController.createUser);
 
 //Actualizar habitación por ID
-router.put('/:id', authMiddleware, userController.updateUser);
+router.put('/:id', userController.updateUser);
 
 //Eliminar habitacion por iD
-router.delete('/:id', authMiddleware, userController.delateUser);
+router.delete('/:id', userController.delateUser);
 
 export default router;

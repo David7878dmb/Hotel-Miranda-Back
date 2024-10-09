@@ -1,6 +1,7 @@
 export interface User {
     id: number;
-    name: string;
+    username: string;
+    password: string;
     picture: string;
     joined: string;  // Fecha de alta, se puede usar tipo `Date` si lo prefieres
     "job-desk": string; // Cambié "job-desk" a camelCase, lo correcto para TypeScript

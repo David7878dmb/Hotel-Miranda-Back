@@ -1,44 +1,45 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import UserService from '../services/usersService';
 
+const userService = new UserService();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
-//Usuario Harcored  
-export interface UserHardcore  {
-    username: string,
-    password: string
-}
-const hardcodedUser: UserHardcore = {
-    username: 'admin',
-    password: '1234',
-  };
-
 // Controlador para manejar el login
-export const loginController = (req: Request, res: Response) => {
+export const loginController = async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
-    console.log(req.body);
-    // Verificar que las credenciales coinciden con el usuario hardcoded
-    if (username === hardcodedUser.username && password === hardcodedUser.password){
-        // Crear un token JWT que expire en 1 hora
-        const token = jwt.sign({username: hardcodedUser.username},JWT_SECRET, {expiresIn: '24h' });
+    try {
+        // Busca el usuario en la base de datos por nombre de usuario
+        const user = await userService.getByAnyone({username: username});
+
+        if (!user) {
+            // Si no se encuentra el usuario
+            res.status(401).json({ message: "Invalid Credentials" });
+            return;
+        }
+
+        // Compara la contraseña ingresada con la almacenada en la base de datos usando bcrypt
+        const passwordMatch = await bcrypt.compare(password, user.password);
         
+        if (!passwordMatch) {
+            // Si las contraseñas no coinciden
+            res.status(401).json({ message: "Invalid Credentials" });
+            return;
+        }
 
-          // Configurar opciones para la cookie (httpOnly por seguridad)
-        const cookieOptions = {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 24 * 60 * 60 * 1000,
-        };
+        // Si las credenciales son correctas, crea un token JWT que expire en 24 horas
+        const token = jwt.sign({ username: user.username }, JWT_SECRET, { expiresIn: '24h' });
 
-        // Enviar la cookie con el token
-        res.cookie('token', token, cookieOptions);
-
-        //Devolvemos el token al cliente
+        // Devuelve el token al cliente
         res.json({ token });
-    } else {
-        //Credenciales invalidas
-        res.status(401).json({message: "Invalid Credentials"});
+
+    } catch (error) {
+        // Maneja errores en la autenticación
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+        return ;
     }
 };
