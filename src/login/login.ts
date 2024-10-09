@@ -10,14 +10,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 // Controlador para manejar el login
 export const loginController = async (req: Request, res: Response) => {
     const { username, password } = req.body;
-
+    
+    console.log(typeof(password))
     try {
         // Busca el usuario en la base de datos por nombre de usuario
         const user = await userService.getByAnyone({username: username});
 
         if (!user) {
             // Si no se encuentra el usuario
-            res.status(401).json({ message: "Invalid Credentials" });
+            res.status(401).json({ message: "Invalid user" });
             return;
         }
 
@@ -26,7 +27,7 @@ export const loginController = async (req: Request, res: Response) => {
         
         if (!passwordMatch) {
             // Si las contraseñas no coinciden
-            res.status(401).json({ message: "Invalid Credentials" });
+            res.status(401).json({ message: "Invalid password" });
             return;
         }
 
