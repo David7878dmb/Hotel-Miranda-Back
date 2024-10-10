@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
-    "seed": "ts-node src/seed.ts"
+    "seed": "npx ts-node src/seed.ts"
   },
   "keywords": [],
   "author": "",

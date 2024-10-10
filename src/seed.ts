@@ -7,9 +7,9 @@ import { contactModel } from "./mongo/contactMongo";
 
 const uri = "mongodb://127.0.0.1:27017/Hotel";
 
-const clearCollections = async() => {
+/*const clearCollections = async() => {
     await contactModel.deleteMany({});
-}
+}*/
 
 const saveFakeData = async () => {
     for (let i = 0; i < 10; i++) {
@@ -19,7 +19,7 @@ const saveFakeData = async () => {
 
 export async function seedDB(){
     await dbConnection();
-    await clearCollections();
+    //await clearCollections();
     await saveFakeData();
     mongoose.connection.close();
 }

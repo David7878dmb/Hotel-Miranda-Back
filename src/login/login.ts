@@ -23,6 +23,7 @@ export const loginController = async (req: Request, res: Response) => {
         }
 
         // Compara la contraseña ingresada con la almacenada en la base de datos usando bcrypt
+        
         const passwordMatch = await bcrypt.compare(password, user.password);
         
         if (!passwordMatch) {
