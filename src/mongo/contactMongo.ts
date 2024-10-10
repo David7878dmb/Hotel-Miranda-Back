@@ -4,7 +4,7 @@ import { connect } from 'http2';
 const { Schema } = mongoose;
 
 export const contactMongo = new Schema<Contact>({
-    id: {type: Number, required: true},
+    id: {type: String, required: true},
     name: {type: String, required: true},
     date: {type: String, required: true},
     email: {type: String, required: true},
