@@ -11,7 +11,6 @@ const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 export const loginController = async (req: Request, res: Response) => {
     const { username, password } = req.body;
     
-    console.log(typeof(password))
     try {
         // Busca el usuario en la base de datos por nombre de usuario
         const user = await userService.getByAnyone({username: username});

@@ -5,7 +5,6 @@ import { CrudService } from './allService';
 
 class userService extends CrudService<User> {
   constructor() {
-    console.log('miau2');
     super(userModel);
   }
 } 

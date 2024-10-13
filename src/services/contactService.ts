@@ -5,7 +5,6 @@ import { CrudService } from './allService';
 
 class ContactService extends CrudService<Contact> {
   constructor() {
-    console.log('miau2');
     super(contactModel);
   }
 } 
