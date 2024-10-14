@@ -3,7 +3,7 @@ import { User } from '../interfaces/userInterfaces';
 const { Schema } = mongoose;
 
 export const userMongo = new Schema({
-    id: Number,
+    id: String,
     username: String,
     password: String,
     picture: String,
@@ -14,4 +14,4 @@ export const userMongo = new Schema({
     status: String
   });
 
-export const userModel = model<User>('User', userMongo);
+export const userModel = mongoose.models.User || model<User>('User', userMongo);

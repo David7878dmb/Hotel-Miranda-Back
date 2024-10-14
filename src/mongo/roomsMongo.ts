@@ -15,7 +15,7 @@ const roomsMongo = new Schema({
     status: String
   });
 
-  const roomModel = model<Room>('Contact', roomsMongo);
+  const roomModel = mongoose.models.Rooms || model<Room>('Rooms', roomsMongo);
 
 
 // Exportar el modelo

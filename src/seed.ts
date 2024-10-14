@@ -1,20 +1,25 @@
 import { fakeContact } from "./data/fake/fakeContact";
 import mongoose, { Model } from "mongoose";
 import { contactModel } from "./mongo/contactMongo";
+import { roomModel } from "./mongo/roomsMongo";
+import { fakeRooms } from "./data/fake/fakeRooms";
+import { userModel } from "./mongo/userMongo";
+import { fakeUsers } from "./data/fake/fakeUsers";
 
 
 
 
 const uri = "mongodb://127.0.0.1:27017/Hotel";
 
-/*const clearCollections = async() => {
-    await contactModel.deleteMany({});
-}*/
 
 const saveFakeData = async () => {
     for (let i = 0; i < 10; i++) {
         const item = new contactModel(fakeContact());
+        const item2 = new roomModel(fakeRooms());
+        const item3 = new userModel(fakeUsers());
+        await item2.save();
         await item.save();
+        await item3.save();
     }}
 
 export async function seedDB(){

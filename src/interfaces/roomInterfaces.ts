@@ -1,5 +1,5 @@
 export interface Room {
-    id: number;
+    id: string;
     "room-type": string;
     number: number;
     picture: string;
