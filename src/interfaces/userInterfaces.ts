@@ -1,8 +1,9 @@
 export interface User {
-    id: string;
     username: string;
     password: string;
     picture: string;
+    position: string;
+    email:string;
     joined: string;  // Fecha de alta, se puede usar tipo `Date` si lo prefieres
     "job-desk": string; // Cambié "job-desk" a camelCase, lo correcto para TypeScript
     schedule: string[]; // Array de días de la semana

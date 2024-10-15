@@ -1,5 +1,10 @@
+import { Types } from "mongoose";
+
+export enum BookingStatus {
+  Pending = "Pending", Booked = "Booked", Cancelled = "Cancelled", Refund = "Refund"
+}
+
 export interface Booking {
-    id: number;
     guest: string;
     picture: string;
     orderDate: string; 
@@ -7,7 +12,8 @@ export interface Booking {
     checkOut: string;
     discount: number;
     notes: string[];
-    roomId: number;
-    status: string; //En el formulario asignar CANCELLED CONFIRMED y PENDING
+    roomId: Types.ObjectId;
+    status: BookingStatus;
   }
-  
+
+  export type BookingInput = Omit<Booking, 'id'>;

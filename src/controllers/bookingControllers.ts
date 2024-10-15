@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { bookingService } from '../services/bookingServices';
+import bookingService from '../services/bookingServices';
+
+const BookingService = new bookingService();
 
 export const bookingController = {
     getAllBooking: async (req: Request, res: Response) => {
         try {
-            const Booking = await bookingService.fetchAll();
+            const Booking = await BookingService.getAll();
             res.json(Booking);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching Booking' });
@@ -14,7 +16,7 @@ export const bookingController = {
     getBookingById: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const Booking = await bookingService.fetchOne(id);
+            const Booking = await BookingService.getByID(+req.params.id);
             if (!Booking) {
                 res.status(404).json({ message: 'Booking not found' });
             } else {
@@ -27,7 +29,7 @@ export const bookingController = {
 
     createBooking: async (req: Request, res: Response) => {
         try {
-            const newBooking = await bookingService.create(req.body);
+            const newBooking = await BookingService.create(req.body);
             res.status(201).json(newBooking);
         } catch (error) {
             res.status(500).json({ message: 'Error creating Booking' });
@@ -37,7 +39,7 @@ export const bookingController = {
     updateBooking: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const updatedBooking = await bookingService.update(id, req.body);
+            const updatedBooking = await BookingService.update(+req.params.id, req.body);
             res.json(updatedBooking);
         } catch (error) {
             res.status(500).json({ message: 'Error updating Booking' });
@@ -47,7 +49,7 @@ export const bookingController = {
     delateBooking: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            await bookingService.delete(id);
+            await BookingService.remove(+req.params.id);
             res.status(204).json();
         } catch (error) {
             res.status(500).json({ message: 'Error deleting Booking' });

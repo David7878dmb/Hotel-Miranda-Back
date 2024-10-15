@@ -4,7 +4,7 @@ import { Room } from '../interfaces/roomInterfaces';
 const { Schema } = mongoose;
 
 const roomsMongo = new Schema({
-    id: String, // String is shorthand for {type: String}
+    dateAdd: String,
     "room-type": String,
     number: Number,
     picture: String,
@@ -12,6 +12,7 @@ const roomsMongo = new Schema({
     "room-floor": String,
     facilities: [String],
     rate: String,
+    discount:Number,
     status: String
   });
 

@@ -3,10 +3,11 @@ import { User } from '../interfaces/userInterfaces';
 const { Schema } = mongoose;
 
 export const userMongo = new Schema({
-    id: String,
     username: String,
     password: String,
     picture: String,
+    posotion: String,
+    email: String,
     joined: String,  
     "job-desk": String,
     schedule: [], 

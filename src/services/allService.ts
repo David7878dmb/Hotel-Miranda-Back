@@ -7,6 +7,15 @@ export class CrudService<T> {
         this.model = model;
     }
 
+
+    async getAllBooking(populateFields: string[]=[]): Promise<T[]> {
+        return this.model.find().populate(populateFields.join(' ')).then((models: T[]) => models);
+    }
+
+    async getByIDBooking(id: string, populateFields: string[]=[]): Promise<T | null> {
+        return await this.model.findById(id).populate(populateFields.join(' '));
+    }
+
     // Obtener todos los elementos
     async getAll(): Promise<T[]> {
         return await this.model.find();

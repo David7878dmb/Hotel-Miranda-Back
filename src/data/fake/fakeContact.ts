@@ -1,15 +1,18 @@
 import { faker } from '@faker-js/faker';
 import { Contact } from "../../interfaces/contactInterfaces";
 import { contactParams } from '../../app/paramsHotel';
-import number from '../../utils/random';
+import random from '../../utils/random';
 
 export const fakeContact = ():Contact => {
+      const archived = random.boolean();
+
       return {
-        id: faker.string.uuid(),
-        name: faker.internet.userName(),
+        name: faker.person.fullName(),
         date: faker.date.past().toUTCString(),
         email: faker.internet.email(),
         phone: faker.phone.toString(),
-        value: number(contactParams.value)
+        subject: faker.lorem.sentence(),
+        comment: faker.lorem.sentences(),
+        archived: archived
       }
 }

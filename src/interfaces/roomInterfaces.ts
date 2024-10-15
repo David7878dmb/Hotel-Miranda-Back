@@ -1,5 +1,5 @@
 export interface Room {
-    id: string;
+    dateAdded: string;
     "room-type": string;
     number: number;
     picture: string;
@@ -7,5 +7,6 @@ export interface Room {
     "room-floor": string;
     facilities: string[];
     rate: string;
+    discount:number;
     status: string;
   }
