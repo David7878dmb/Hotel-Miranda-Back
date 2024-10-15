@@ -1,5 +1,6 @@
-import { model, Schema } from 'mongoose';
+import mongoose, { model, Schema } from 'mongoose';
 import { BookingInput } from '../interfaces/bookingInterfaces';
+import { Types } from "mongoose";
 
 const BookingSchema = new Schema<BookingInput>({
     guest: { type: String, required: true },
@@ -13,4 +14,4 @@ const BookingSchema = new Schema<BookingInput>({
     status: { type: String, required: true }
 });
 
-export const BookingModel = model<BookingInput>('Booking', BookingSchema);
+export const BookingModel = mongoose.models.Booking || model<BookingInput>('Booking', BookingSchema);

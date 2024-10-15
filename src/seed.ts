@@ -5,6 +5,8 @@ import { roomModel } from "./mongo/roomsMongo";
 import { fakeRooms } from "./data/fake/fakeRooms";
 import { userModel } from "./mongo/userMongo";
 import { fakeUsers } from "./data/fake/fakeUsers";
+import { BookingModel } from "./mongo/bookingMongo";
+import { fakeBooking } from "./data/fake/fakeBookings";
 
 
 
@@ -17,9 +19,11 @@ const saveFakeData = async () => {
         const item = new contactModel(fakeContact());
         const item2 = new roomModel(fakeRooms());
         const item3 = new userModel(fakeUsers());
-        await item2.save();
+        //const item4 = new BookingModel(fakeBooking());
         await item.save();
+        await item2.save();
         await item3.save();
+        //await item4.save();
     }}
 
 export async function seedDB(){
