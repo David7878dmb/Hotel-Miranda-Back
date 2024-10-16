@@ -17,7 +17,7 @@ export const fakeBooking = async () => {
   
 
   
-  return {
+    const prueba = {
     guest: faker.person.fullName(),
     picture: faker.image.url(),
     orderDate: faker.date.past().toISOString(),
@@ -29,5 +29,8 @@ export const fakeBooking = async () => {
     status: faker.helpers.enumValue(BookingStatus)
   };
 
+
+
+  return prueba;
   
 };

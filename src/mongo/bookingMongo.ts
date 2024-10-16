@@ -3,15 +3,15 @@ import { BookingInput } from '../interfaces/bookingInterfaces';
 import { Types } from "mongoose";
 
 const BookingSchema = new Schema<BookingInput>({
-    guest: { type: String, required: true },
-    picture: { type: String, required: true },
-    orderDate: { type: String, required: true },
-    checkIn: { type: String, required: true },
-    checkOut: { type: String, required: true },
-    discount: { type: Number, required: true },
-    notes: { type: [String], required: true },
-    roomId: { type: Schema.Types.ObjectId, ref: 'Room', required: true },
-    status: { type: String, required: true }
+    guest: { type: String },
+    picture: { type: String },
+    orderDate: { type: String },
+    checkIn: { type: String },
+    checkOut: { type: String },
+    discount: { type: Number },
+    notes: { type: [String] },
+    roomId: { type: Schema.Types.ObjectId, ref: 'Room' },
+    status: { type: String }
 });
 
 export const BookingModel = mongoose.models.Booking || model<BookingInput>('Booking', BookingSchema);

@@ -15,15 +15,16 @@ const uri = "mongodb://127.0.0.1:27017/Hotel";
 
 
 const saveFakeData = async () => {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1; i++) {
         const item = new contactModel(fakeContact());
         const item2 = new roomModel(fakeRooms());
         const item3 = new userModel(fakeUsers());
-        //const item4 = new BookingModel(fakeBooking());
+        const itemAux = await fakeBooking();
+        let item4 = new BookingModel(itemAux);
         await item.save();
         await item2.save();
         await item3.save();
-        //await item4.save();
+        await item4.save();
     }}
 
 export async function seedDB(){
