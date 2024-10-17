@@ -5,7 +5,7 @@ import { userParams } from '../../app/paramsHotel';
 
 export const fakeUsers = (): User => {
   return {
-    username: faker.name.fullName(),  
+    username: faker.person.fullName(),  
     password: faker.internet.password(),
     picture: faker.image.avatar(),
     position: faker.helpers.arrayElement(userParams.positions),

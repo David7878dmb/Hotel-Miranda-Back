@@ -6,8 +6,7 @@ const username = "admin4";
 const password = "123";
 const dbName = "Hotel";
 
-const connectionString = `mongodb+srv://${username}:${password}@cluster.nd9ic.mongodb.net/
-`
+const connectionString = `mongodb+srv://admin4:123@cluster.nd9ic.mongodb.net/Hotel`;
 
 export const connectToDB = async () => {
     try {

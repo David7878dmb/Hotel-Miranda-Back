@@ -1,5 +1,5 @@
 import { fakeContact } from "./data/fake/fakeContact";
-import mongoose, { Model } from "mongoose";
+import mongoose from "mongoose";
 import { contactModel } from "./mongo/contactMongo";
 import { roomModel } from "./mongo/roomsMongo";
 import { fakeRooms } from "./data/fake/fakeRooms";
@@ -8,30 +8,32 @@ import { fakeUsers } from "./data/fake/fakeUsers";
 import { BookingModel } from "./mongo/bookingMongo";
 import { fakeBooking } from "./data/fake/fakeBookings";
 
-
-
-
-const uri = "mongodb://127.0.0.1:27017/Hotel";
-
+const uri = "mongodb+srv://admin4:123@cluster.nd9ic.mongodb.net/Hotel";
 
 const saveFakeData = async () => {
-    for (let i = 0; i < 1; i++) {
-        const item = new contactModel(fakeContact());
-        const item2 = new roomModel(fakeRooms());
-        const item3 = new userModel(fakeUsers());
-        const itemAux = await fakeBooking();
-        let item4 = new BookingModel(itemAux);
-        await item.save();
-        await item2.save();
-        await item3.save();
-        await item4.save();
-    }}
+    // Primero, crear habitaciones
+    for (let i = 0; i < 10; i++) {
+        const room = new roomModel(fakeRooms());
+        await room.save();
+    }
+    console.log("Fake rooms created");
 
-export async function seedDB(){
-    await dbConnection();
-    //await clearCollections();
-    await saveFakeData();
-    mongoose.connection.close();
+    // Luego, crear el resto de los datos
+    for (let i = 0; i < 10; i++) {
+        const contact = new contactModel(fakeContact());
+        const user = new userModel(fakeUsers());
+        await contact.save();
+        await user.save();
+    }
+    console.log("Fake contacts and users created");
+
+    // Finalmente, crear reservas
+    for (let i = 0; i < 10; i++) {
+        const bookingData = await fakeBooking();
+        const booking = new BookingModel(bookingData);
+        await booking.save();
+    }
+    console.log("Fake bookings created");
 }
 
 async function dbConnection() {
@@ -44,4 +46,10 @@ async function dbConnection() {
     }
 }
 
-seedDB();
+export async function seedDB(){
+    await dbConnection();
+    await saveFakeData();
+    await mongoose.connection.close();
+}
+
+seedDB().then(() => console.log("Seeding completed")).catch(console.error);

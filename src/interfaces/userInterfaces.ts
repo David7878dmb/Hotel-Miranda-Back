@@ -4,11 +4,11 @@ export interface User {
     picture: string;
     position: string;
     email:string;
-    joined: string;  // Fecha de alta, se puede usar tipo `Date` si lo prefieres
-    "job-desk": string; // Cambié "job-desk" a camelCase, lo correcto para TypeScript
-    schedule: string[]; // Array de días de la semana
+    joined: string;
+    "job-desk": string; 
+    schedule: string[];
     contact: string;
-    status: string; // Puedes restringir el estado a estos dos valores
+    status: string;
   }
 
 enum userStatus {
