@@ -1,7 +1,7 @@
 import app from "./app";
 import { connectToDB } from "./utils/connectionAtlas";
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 const startServer = async () => {
   try {
