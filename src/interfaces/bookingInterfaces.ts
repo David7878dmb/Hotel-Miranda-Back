@@ -4,7 +4,7 @@ export enum BookingStatus {
   Pending = "Pending", Booked = "Booked", Cancelled = "Cancelled", Refund = "Refund"
 }
 
-export interface Booking {
+export interface Booking extends Document{
     guest: string;
     picture: string;
     orderDate: string; 

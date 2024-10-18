@@ -1,4 +1,4 @@
-export interface Contact {
+export interface Contact extends Document{
     name: string;
     date: string;
     email: string;

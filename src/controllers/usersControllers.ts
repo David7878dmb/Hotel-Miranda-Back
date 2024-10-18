@@ -1,5 +1,6 @@
-import { Request, Response } from 'express';
+import { Request, Response,NextFunction } from 'express';
 import UserService from '../services/usersService';
+import { isValidObjectId } from 'mongoose';
 
 
 const userService = new UserService();
@@ -14,19 +15,24 @@ export const userController = {
         }
     },
 
-    getUserById: async (req: Request, res: Response) => {
+    getUserById: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const id = req.params.id;
-            const User = await userService.getByID(+id);
-            if (!User) {
-                res.status(404).json({ message: 'User not found' });
-            } else {
-                res.json(User);
+            if (!isValidObjectId(id)) {
+                res.status(400).json({ message: 'Invalid user ID format' });
+                return;
             }
+            const user = await userService.getByID(id);
+            if (!user) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+            res.json(user);
         } catch (error) {
-            res.status(500).json({ message: 'Error fetching room' });
+            next(error);
         }
     },
+
 
     createUser: async (req: Request, res: Response) => {
         try {

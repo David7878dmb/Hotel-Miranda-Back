@@ -13,7 +13,7 @@ export const bookingController = {
         }
     },
 
-    getBookingById: async (req: Request, res: Response) => {
+    /*getBookingById: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
             const Booking = await BookingService.getByID(+req.params.id);
@@ -25,7 +25,7 @@ export const bookingController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching room' });
         }
-    },
+    },*/
 
     createBooking: async (req: Request, res: Response) => {
         try {

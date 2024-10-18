@@ -13,7 +13,7 @@ export const roomController = {
         }
     },
 
-    getRoomById: async (req: Request, res: Response) => {
+    /*getRoomById: async (req: Request, res: Response) => {
         try {
             const room = await roomService.getByID(+req.params.id);
             if (!room) {
@@ -24,7 +24,7 @@ export const roomController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching room' });
         }
-    },
+    },*/
 
     createRoom: async (req: Request, res: Response) => {
         try {

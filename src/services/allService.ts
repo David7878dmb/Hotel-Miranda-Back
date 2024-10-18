@@ -1,7 +1,7 @@
 import { Model } from "mongoose";
 
-export class CrudService<T> {
-    private model: Model<T>;
+export class CrudService<T extends Document> {
+    protected model: Model<T>;
 
     constructor(model: Model<T>) {
         this.model = model;
@@ -22,10 +22,10 @@ export class CrudService<T> {
     }
 
     // Obtener por ID
-    async getByID(id: number): Promise<T | null> {
-        return await this.model.findOne({ id }); 
+    async getByID(id: string): Promise<T | null> {
+        return this.model.findById(id);
     }
-
+    
     //Obtener lo que sea
     async getByAnyone(props: {}): Promise<T | null> {
         return await this.model.findOne(props); 

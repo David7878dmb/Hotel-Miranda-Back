@@ -15,7 +15,7 @@ export const contactController = {
         }
     },
 
-    getContactById: async (req: Request, res: Response) => {
+  /*  getContactById: async (req: Request, res: Response) => {
         try {
             const contact = await contactService.getByID(+req.params.id);
             if (!contact) {
@@ -26,7 +26,7 @@ export const contactController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching contact' });
         }
-    },
+    },*/
 
     createContact: async (req: Request, res: Response) => {
         try {

@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', authMiddleware, contactController.getAllContact);
 
 // Obtener un contacto por ID
-router.get('/:id', authMiddleware, contactController.getContactById);
+//router.get('/:id', authMiddleware, contactController.getContactById);
 
 // Crear un nuevo contacto
 router.post('/', authMiddleware, contactController.createContact); 

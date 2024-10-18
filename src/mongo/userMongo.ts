@@ -2,17 +2,19 @@ import mongoose, { model } from 'mongoose';
 import { User } from '../interfaces/userInterfaces';
 const { Schema } = mongoose;
 
-export const userMongo = new Schema({
-    username: String,
-    password: String,
-    picture: String,
-    posotion: String,
-    email: String,
-    joined: String,  
-    "job-desk": String,
-    schedule: [], 
-    contact: String,
-    status: String
-  });
+const userSchema = new Schema({
+  username: String,
+  password: String,
+  picture: String,
+  position: String,  // Corregido de 'posotion' a 'position'
+  email: String,
+  joined: String,  
+  "job-desk": String,
+  schedule: [Schema.Types.Mixed], 
+  contact: String,
+  status: String
+}, { timestamps: true });
 
-export const userModel = mongoose.models.User || model<User>('User', userMongo);
+export interface UserDocument extends User, Document {}
+
+export const userModel = mongoose.models.User || model<UserDocument>('User', userSchema);

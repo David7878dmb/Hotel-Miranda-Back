@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', authMiddleware, bookingController.getAllBooking);
 
 //Habitacion por id
-router.get('/:id', authMiddleware, bookingController.getBookingById);
+//router.get('/:id', authMiddleware, bookingController.getBookingById);
 
 //Crear habitacion
 router.get('/', authMiddleware, bookingController.createBooking);

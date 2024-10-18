@@ -1,4 +1,4 @@
-export interface Room {
+export interface Room extends Document {
     dateAdded: string;
     "room-type": string;
     number: number;
