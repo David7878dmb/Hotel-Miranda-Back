@@ -39,27 +39,43 @@ export const userController = {
             const newUser = await userService.create(req.body);
             res.status(201).json(newUser);
         } catch (error) {
-            res.status(500).json({ message: 'Error creating User' });
+            res.status(500).json({ message: 'Error creating user' });
         }
     },
 
     updateUser: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const updatedUser = await userService.update(+id, req.body);
+            if (!isValidObjectId(id)) {
+                res.status(400).json({ message: 'Invalid user ID format' });
+                return;
+            }
+            const updatedUser = await userService.update(id, req.body);
+            if (!updatedUser) {
+                res.status(404).json({ message: 'User not found or not updated' });
+                return;
+            }
             res.json(updatedUser);
         } catch (error) {
-            res.status(500).json({ message: 'Error updating User' });
+            res.status(500).json({ message: 'Error updating user' });
         }
     },
 
-    delateUser: async (req: Request, res: Response) => {
+    deleteUser: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            await userService.remove(+id);
+            if (!isValidObjectId(id)) {
+                res.status(400).json({ message: 'Invalid user ID format' });
+                return;
+            }
+            const success = await userService.remove(id);
+            if (!success) {
+                res.status(404).json({ message: 'User not found or not deleted' });
+                return;
+            }
             res.status(204).json();
         } catch (error) {
-            res.status(500).json({ message: 'Error deleting User' });
+            res.status(500).json({ message: 'Error deleting user' });
         }
     }
 };

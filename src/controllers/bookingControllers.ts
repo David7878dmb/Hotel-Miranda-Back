@@ -26,7 +26,7 @@ export const bookingController = {
             res.status(500).json({ message: 'Error fetching room' });
         }
     },*/
-
+/*
     createBooking: async (req: Request, res: Response) => {
         try {
             const newBooking = await BookingService.create(req.body);
@@ -54,5 +54,5 @@ export const bookingController = {
         } catch (error) {
             res.status(500).json({ message: 'Error deleting Booking' });
         }
-    }
+    }*/
 };

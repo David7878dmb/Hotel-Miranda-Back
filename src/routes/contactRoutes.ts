@@ -11,12 +11,12 @@ router.get('/', authMiddleware, contactController.getAllContact);
 //router.get('/:id', authMiddleware, contactController.getContactById);
 
 // Crear un nuevo contacto
-router.post('/', authMiddleware, contactController.createContact); 
+/*router.post('/', authMiddleware, contactController.createContact); 
 
 // Actualizar contacto por ID
 router.put('/:id', authMiddleware, contactController.updateContact); 
 
 // Eliminar contacto por ID
 router.delete('/:id', authMiddleware, contactController.deleteContact);
-
+*/
 export default router;

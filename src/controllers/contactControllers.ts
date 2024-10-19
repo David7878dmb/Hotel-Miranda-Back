@@ -26,7 +26,7 @@ export const contactController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching contact' });
         }
-    },*/
+    },
 
     createContact: async (req: Request, res: Response) => {
         try {
@@ -54,5 +54,5 @@ export const contactController = {
                 res.status(404).send({ message: 'Contact not found' });
             }
         });
-    }
+    }*/
 };

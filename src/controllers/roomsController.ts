@@ -24,7 +24,7 @@ export const roomController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching room' });
         }
-    },*/
+    },
 
     createRoom: async (req: Request, res: Response) => {
         try {
@@ -56,4 +56,4 @@ export const roomController = {
             res.status(500).json({ message: 'Error deleting room' });
         }
     }
-};
+*/};

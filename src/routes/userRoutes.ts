@@ -17,6 +17,6 @@ router.post('/', userController.createUser);
 router.put('/:id', userController.updateUser);
 
 //Eliminar habitacion por iD
-router.delete('/:id', userController.delateUser);
+router.delete('/:id', userController.deleteUser);
 
 export default router;
