@@ -4,6 +4,7 @@ import RoomService from '../services/roomServices';
 const roomService = new RoomService();
 
 export const roomController = {
+    // Obtener todas las habitaciones
     getAllRooms: async (req: Request, res: Response) => {
         try {
             const rooms = await roomService.getAll();
@@ -13,9 +14,11 @@ export const roomController = {
         }
     },
 
-    /*getRoomById: async (req: Request, res: Response) => {
+    // Obtener una habitación por ID
+    getRoomById: async (req: Request, res: Response) => {
         try {
-            const room = await roomService.getByID(+req.params.id);
+            const id = req.params.id;
+            const room = await roomService.getByID(id);
             if (!room) {
                 res.status(404).json({ message: 'Room not found' });
             } else {
@@ -26,6 +29,7 @@ export const roomController = {
         }
     },
 
+    // Crear una nueva habitación
     createRoom: async (req: Request, res: Response) => {
         try {
             const newRoom = await roomService.create(req.body);
@@ -35,18 +39,26 @@ export const roomController = {
         }
     },
 
+    // Actualizar una habitación existente por ID
     updateRoom: async (req: Request, res: Response) => {
         try {
-            const updatedRoom = await roomService.update(+req.params.id, req.body);
-            res.json(updatedRoom);
+            const id = req.params.id;
+            const updatedRoom = await roomService.update(id, req.body);
+            if (!updatedRoom) {
+                res.status(404).json({ message: 'Room not found or not updated' });
+            } else {
+                res.json(updatedRoom);
+            }
         } catch (error) {
             res.status(500).json({ message: 'Error updating room' });
         }
     },
 
+    // Eliminar una habitación por ID
     deleteRoom: async (req: Request, res: Response) => {
         try {
-            const deleted = await roomService.remove(+req.params.id);
+            const id = req.params.id;
+            const deleted = await roomService.remove(id);
             if (deleted) {
                 res.status(204).send();
             } else {
@@ -56,4 +68,4 @@ export const roomController = {
             res.status(500).json({ message: 'Error deleting room' });
         }
     }
-*/};
+};

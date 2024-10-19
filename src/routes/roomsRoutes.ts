@@ -4,19 +4,19 @@ import { authMiddleware } from '../middelware/auth';
 
 const router = Router();
 
-//Todas las habitaciones 
+// Obtener todas las habitaciones 
 router.get('/', authMiddleware, roomController.getAllRooms);
 
-//Habitacion por id
-//router.get('/:id', authMiddleware, roomController.getRoomById);
+// Obtener una habitación por ID
+router.get('/:id', authMiddleware, roomController.getRoomById);
 
-//Crear habitacion
-/*router.post('/', authMiddleware, roomController.createRoom);
+// Crear una nueva habitación
+router.post('/', authMiddleware, roomController.createRoom);
 
-//Actualizar habitación por ID
+// Actualizar una habitación por ID
 router.put('/:id', authMiddleware, roomController.updateRoom);
 
-//Eliminar habitacion por iD
+// Eliminar una habitación por ID
 router.delete('/:id', authMiddleware, roomController.deleteRoom);
-*/
+
 export default router;

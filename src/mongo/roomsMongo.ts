@@ -14,7 +14,7 @@ const roomsMongo = new Schema({
     rate: String,
     discount:Number,
     status: String
-  });
+  }, { timestamps: true });
 
   const roomModel = mongoose.models.Rooms || model<Room>('Rooms', roomsMongo);
 
