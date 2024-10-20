@@ -5,18 +5,18 @@ import { authMiddleware } from '../middelware/auth';
 const router = Router();
 
 //Todas las habitaciones 
-router.get('/', authMiddleware, bookingController.getAllBooking);
+router.get('/', bookingController.getAllBooking);
 
 //Habitacion por id
-//router.get('/:id', authMiddleware, bookingController.getBookingById);
+router.get('/:id', bookingController.getBookingById);
 
 //Crear habitacion
-/*router.get('/', authMiddleware, bookingController.createBooking);
+router.get('/', bookingController.createBooking);
 
 //Actualizar habitación por ID
-router.get('/:id', authMiddleware, bookingController.updateBooking);
+router.get('/:id', bookingController.updateBooking);
 
 //Eliminar habitacion por iD
-router.get('/:id', authMiddleware, bookingController.delateBooking);
-*/
+router.get('/:id', bookingController.delateBooking);
+
 export default router;

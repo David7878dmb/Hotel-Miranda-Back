@@ -3,7 +3,8 @@ import { BookingInput } from '../interfaces/bookingInterfaces';
 import { CrudService } from './allService';
 
 class BookingService extends CrudService<BookingInput> {
-  populateFields = ['room']
+  populateFields = ['room'];
+  
   constructor() {
     super(BookingModel);
   }

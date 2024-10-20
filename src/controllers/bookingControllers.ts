@@ -13,10 +13,10 @@ export const bookingController = {
         }
     },
 
-    /*getBookingById: async (req: Request, res: Response) => {
+    getBookingById: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const Booking = await BookingService.getByID(+req.params.id);
+            const Booking = await BookingService.getByID(id);
             if (!Booking) {
                 res.status(404).json({ message: 'Booking not found' });
             } else {
@@ -25,8 +25,8 @@ export const bookingController = {
         } catch (error) {
             res.status(500).json({ message: 'Error fetching room' });
         }
-    },*/
-/*
+    },
+
     createBooking: async (req: Request, res: Response) => {
         try {
             const newBooking = await BookingService.create(req.body);
@@ -39,7 +39,7 @@ export const bookingController = {
     updateBooking: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const updatedBooking = await BookingService.update(+req.params.id, req.body);
+            const updatedBooking = await BookingService.update(id, req.body);
             res.json(updatedBooking);
         } catch (error) {
             res.status(500).json({ message: 'Error updating Booking' });
@@ -49,10 +49,10 @@ export const bookingController = {
     delateBooking: async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            await BookingService.remove(+req.params.id);
+            await BookingService.remove(id);
             res.status(204).json();
         } catch (error) {
             res.status(500).json({ message: 'Error deleting Booking' });
         }
-    }*/
+    }
 };

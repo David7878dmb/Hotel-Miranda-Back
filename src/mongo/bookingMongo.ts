@@ -12,6 +12,6 @@ const BookingSchema = new Schema<BookingInput>({
     notes: { type: [String] },
     roomId: { type: Schema.Types.ObjectId, ref: 'Room' },
     status: { type: String }
-});
+} ,{ timestamps: true }); 
 
 export const BookingModel = mongoose.models.Booking || model<BookingInput>('Booking', BookingSchema);
