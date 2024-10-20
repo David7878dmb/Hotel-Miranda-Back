@@ -11,7 +11,7 @@ export const contactMongo = new Schema<Contact>({
     subject: String,
     comment: String,
     archived: Boolean
-  });   
+  }, { timestamps: true }); 
 
 // 3. Create a Model.
 const contactModel = mongoose.models.Contact || model<Contact>('Contact', contactMongo);
