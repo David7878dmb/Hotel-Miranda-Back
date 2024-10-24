@@ -1,81 +1,80 @@
-import { Request, Response,NextFunction } from 'express';
-import UserService from '../services/usersService';
-import { isValidObjectId } from 'mongoose';
+import { Request, Response } from 'express';
+import { UserService } from '../services/usersService';
+import { connectToDB } from '../utils/connectionSQL';
 
+// Inicializar UserService con la conexión a la base de datos
+let userService: UserService;
 
-const userService = new UserService();
+export const initializeUserService = async () => {
+  const db = await connectToDB();
+  userService = new UserService(db);
+};
+
+initializeUserService();
 
 export const userController = {
-    getAllUser: async (req: Request, res: Response) => {
-        try {
-            const User = await userService.getAll();
-            res.json(User);
-        } catch (error) {
-            res.status(500).json({ message: 'Error fetching User' });
-        }
-    },
 
-    getUserById: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        try {
-            const id = req.params.id;
-            if (!isValidObjectId(id)) {
-                res.status(400).json({ message: 'Invalid user ID format' });
-                return;
-            }
-            const user = await userService.getByID(id);
-            if (!user) {
-                res.status(404).json({ message: 'User not found' });
-                return;
-            }
-            res.json(user);
-        } catch (error) {
-            next(error);
-        }
-    },
-
-
-    createUser: async (req: Request, res: Response) => {
-        try {
-            const newUser = await userService.create(req.body);
-            res.status(201).json(newUser);
-        } catch (error) {
-            res.status(500).json({ message: 'Error creating user' });
-        }
-    },
-
-    updateUser: async (req: Request, res: Response) => {
-        try {
-            const id = req.params.id;
-            if (!isValidObjectId(id)) {
-                res.status(400).json({ message: 'Invalid user ID format' });
-                return;
-            }
-            const updatedUser = await userService.update(id, req.body);
-            if (!updatedUser) {
-                res.status(404).json({ message: 'User not found or not updated' });
-                return;
-            }
-            res.json(updatedUser);
-        } catch (error) {
-            res.status(500).json({ message: 'Error updating user' });
-        }
-    },
-
-    deleteUser: async (req: Request, res: Response) => {
-        try {
-            const id = req.params.id;
-            if (!isValidObjectId(id)) {
-                res.status(400).json({ message: 'Invalid user ID format' });
-                return;
-            }
-            const success = await userService.remove(id);
-            if (!success) {
-                res.status(404).json({ message: 'User not found or not deleted' });
-                return;
-            }
-            res.status(204).json();
-        } catch (error) {
-            res.status(500).json({ message: 'Error deleting user' });
-        }
+  
+  // Obtener todos los usuarios
+  getAllUsers : async (req: Request, res: Response) => {
+    try {
+      const users = await userService.getAllUsers();
+      res.status(200).json(users);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-};
+  },
+  
+  // Obtener usuario por ID
+  getUserById : async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const user = await userService.getUserById(Number(id));
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  },
+
+
+ createUser : async (req: Request, res: Response) => {
+   try {
+     const newUser = req.body;
+     await userService.createUser(newUser);
+     res.status(201).json({ message: 'User created successfully' });
+   } catch (error) {
+     console.error('Error creating user:', error);
+     res.status(500).json({ error: 'Internal server error' });
+   }
+ },
+
+// Actualizar un usuario por ID
+ updateUser : async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+  try {
+    await userService.updateUser(Number(id), updatedData);
+    res.status(200).json({ message: 'User updated successfully' });
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+},
+
+// Eliminar un usuario por ID
+ deleteUser : async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    await userService.deleteUser(Number(id));
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+}

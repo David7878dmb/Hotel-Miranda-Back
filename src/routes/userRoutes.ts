@@ -1,22 +1,14 @@
 import { Router } from "express";
 import { userController } from '../controllers/usersControllers';
-import { authMiddleware } from '../middelware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
-//Todas las habitaciones 
-router.get('/', userController.getAllUser);
-
-//Habitacion por id
-router.get('/:id', userController.getUserById);
-
-//Crear habitacion
-router.post('/', userController.createUser);
-
-//Actualizar habitación por ID
-router.put('/:id', userController.updateUser);
-
-//Eliminar habitacion por iD
-router.delete('/:id', userController.deleteUser);
+// Rutas de usuario
+router.get('/', asyncHandler(userController.getAllUsers));
+router.get('/:id', asyncHandler(userController.getUserById));
+router.post('/', asyncHandler(userController.createUser));
+router.put('/:id', asyncHandler(userController.updateUser));
+router.delete('/:id', asyncHandler(userController.deleteUser));
 
 export default router;

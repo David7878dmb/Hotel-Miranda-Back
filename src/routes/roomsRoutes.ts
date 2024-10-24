@@ -1,22 +1,15 @@
 import { Router } from "express";
 import { roomController } from '../controllers/roomsController';
 import { authMiddleware } from '../middelware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
-// Obtener todas las habitaciones 
-router.get('/', authMiddleware, roomController.getAllRooms);
-
-// Obtener una habitación por ID
-router.get('/:id', authMiddleware, roomController.getRoomById);
-
-// Crear una nueva habitación
-router.post('/', authMiddleware, roomController.createRoom);
-
-// Actualizar una habitación por ID
-router.put('/:id', authMiddleware, roomController.updateRoom);
-
-// Eliminar una habitación por ID
-router.delete('/:id', authMiddleware, roomController.deleteRoom);
+// Rutas de habitaciones
+router.get('/', authMiddleware, asyncHandler(roomController.getAllRooms));
+router.get('/:id', authMiddleware, asyncHandler(roomController.getRoomById));
+router.post('/', authMiddleware, asyncHandler(roomController.createRoom));
+router.put('/:id', authMiddleware, asyncHandler(roomController.updateRoom));
+router.delete('/:id', authMiddleware, asyncHandler(roomController.deleteRoom));
 
 export default router;
