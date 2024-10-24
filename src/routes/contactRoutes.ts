@@ -1,22 +1,15 @@
 import { Router } from "express";
 import { contactController } from '../controllers/contactControllers';
 import { authMiddleware } from '../middelware/auth';
+import { asyncHandler } from "../utils/asyncHandler";
 
 const router = Router();
 
-// Obtener todos los contactos
-router.get('/', authMiddleware, contactController.getAllContact);
-
-// Obtener un contacto por ID
-router.get('/:id', authMiddleware, contactController.getContactById);
-
-// Crear un nuevo contacto
-router.post('/', authMiddleware, contactController.createContact);
-
-// Actualizar contacto por ID
-router.put('/:id', authMiddleware, contactController.updateContact);
-
-// Eliminar contacto por ID
-router.delete('/:id', authMiddleware, contactController.deleteContact);
+// Rutas de contactos protegidas por el middleware de autenticación
+router.get('/', authMiddleware, asyncHandler(contactController.getAllContact));
+router.get('/:id', authMiddleware,asyncHandler (contactController.getContactById));
+router.post('/', authMiddleware, asyncHandler (contactController.createContact));
+router.put('/:id', authMiddleware, asyncHandler(contactController.updateContact));
+router.delete('/:id', authMiddleware, asyncHandler(contactController.deleteContact));
 
 export default router;
