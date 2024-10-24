@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import UserService from '../services/usersService';
+import { UserService } from '../services/usersService';
+import { connectToDB } from '../utils/connectionSQL';
 
-const userService = new UserService();
+let userService : UserService;
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
@@ -13,7 +14,7 @@ export const loginController = async (req: Request, res: Response) => {
     
     try {
         // Busca el usuario en la base de datos por nombre de usuario
-        const user = await userService.getByAnyone({username: username});
+        const user = await userService.getUserById(username); // Cambia aquí para usar username
 
         if (!user) {
             // Si no se encuentra el usuario
@@ -22,7 +23,6 @@ export const loginController = async (req: Request, res: Response) => {
         }
 
         // Compara la contraseña ingresada con la almacenada en la base de datos usando bcrypt
-        
         const passwordMatch = await bcrypt.compare(password, user.password);
         
         if (!passwordMatch) {

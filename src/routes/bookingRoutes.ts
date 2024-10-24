@@ -1,22 +1,23 @@
-import { Router } from "express";
+import { Router } from 'express';
 import { bookingController } from '../controllers/bookingControllers';
 import { authMiddleware } from '../middelware/auth';
+import { asyncHandler } from '../utils/asyncHandler';
 
 const router = Router();
 
-//Todas las habitaciones 
-router.get('/', bookingController.getAllBooking);
+// Obtener todas las reservas
+router.get('/', authMiddleware, asyncHandler(bookingController.getAllBooking));
 
-//Habitacion por id
-router.get('/:id', bookingController.getBookingById);
+// Obtener una reserva por ID
+router.get('/:id', authMiddleware, asyncHandler(bookingController.getBookingById));
 
-//Crear habitacion
-router.get('/', bookingController.createBooking);
+// Crear una nueva reserva
+router.post('/', authMiddleware, asyncHandler(bookingController.createBooking));
 
-//Actualizar habitación por ID
-router.get('/:id', bookingController.updateBooking);
+// Actualizar una reserva por ID
+router.put('/:id', authMiddleware, asyncHandler(bookingController.updateBooking));
 
-//Eliminar habitacion por iD
-router.get('/:id', bookingController.delateBooking);
+// Eliminar una reserva por ID
+router.delete('/:id', authMiddleware, asyncHandler(bookingController.deleteBooking));
 
 export default router;
