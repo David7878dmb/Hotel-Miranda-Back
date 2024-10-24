@@ -7,7 +7,32 @@ import { userModel } from "./mongo/userMongo";
 import { fakeUsers } from "./data/fake/fakeUsers";
 import { BookingModel } from "./mongo/bookingMongo";
 import { fakeBooking } from "./data/fake/fakeBookings";
+import { connectToDB } from "./utils/connectionSQL";
+import { createTableUser } from "./interfaces/userInterfaces";
+import { createTableContact } from "./interfaces/contactInterfaces";
+import { createTableRoom } from "./interfaces/roomInterfaces";
+import { createTableBooking } from "./interfaces/bookingInterfaces";
 
+const createTable = async () =>{
+    const connection = await connectToDB();
+
+    try {
+        await connection.execute(createTableUser)
+        await connection.execute(createTableContact)
+        await connection.execute(createTableRoom)
+        await connection.execute(createTableBooking)
+
+        console.log('Create Table SuccessFully');
+    } catch (error) {
+        console.log('Error creating tables', error);
+    } finally {
+        connection.end();
+    }
+};
+
+createTable().catch(err => console.error('error creating tables:', err));
+
+/*
 const uri = "mongodb+srv://admin4:123@cluster.nd9ic.mongodb.net/Hotel";
 
 const saveFakeData = async () => {
@@ -52,4 +77,4 @@ export async function seedDB(){
     await mongoose.connection.close();
 }
 
-seedDB().then(() => console.log("Seeding completed")).catch(console.error);
+seedDB().then(() => console.log("Seeding completed")).catch(console.error);*/

@@ -10,7 +10,7 @@ export const connectToDB = async () => {
       host: process.env.MYSQL_HOST || 'localhost',
       user: process.env.MYSQL_USER || 'root',
       password: process.env.MYSQL_PASSWORD || '',
-      database: process.env.MYSQL_DATABASE || 'hotel_db',
+      database: process.env.MYSQL_DATABASE || 'hotelmiranda',
     });
 
     console.log('MySQL connected successfully');
